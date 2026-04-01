@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@layer base {
+
+  :root,
+  [data-theme="light"] {
+    /* Page background */
+    --page-bg: #f8fafc;
+    --page-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+
+    /* Sidebar */
+    --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    --sidebar-border: rgba(99, 102, 241, 0.15);
+    --sidebar-active-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(59, 130, 246, 0.08));
+    --sidebar-active-text: #4338CA;
+    --sidebar-active-icon: #6366F1;
+    --sidebar-active-border: #6366F1;
+    --sidebar-text: #64748B;
+    --sidebar-icon: #94A3B8;
+    --sidebar-user-name: #1e293b;
+    --sidebar-user-role: #64748B;
+    --sidebar-logo-text: #1e293b;
+
+    /* Navbar */
+    --navbar-bg: rgba(255, 255, 255, 0.85);
+    --navbar-border: rgba(99, 102, 241, 0.1);
+    --navbar-search-bg: rgba(241, 245, 249, 0.8);
+    --navbar-search-border: rgba(99, 102, 241, 0.15);
+    --navbar-search-text: #1e293b;
+    --navbar-search-placeholder: #94A3B8;
+    --navbar-bell-bg: rgba(241, 245, 249, 0.8);
+    --navbar-bell-icon: #64748B;
+    --navbar-name: #1e293b;
+    --navbar-role: #64748B;
+    --navbar-divider: rgba(99, 102, 241, 0.15);
+
+    /* Cards */
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(99, 102, 241, 0.12);
+    --card-inner-bg: rgba(241, 245, 249, 0.6);
+    --card-inner-border: rgba(99, 102, 241, 0.08);
+
+    /* Text */
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+    --text-faint: #94A3B8;
+    --text-white-always: #ffffff;
+
+    /* Table */
+    --table-header-text: #64748B;
+    --table-row-border: rgba(99, 102, 241, 0.08);
+    --table-row-hover: rgba(99, 102, 241, 0.04);
+
+    /* Buttons */
+    --btn-secondary-bg: rgba(99, 102, 241, 0.08);
+    --btn-secondary-text: #6366F1;
+    --btn-secondary-border: rgba(99, 102, 241, 0.18);
+
+    /* Input */
+    --input-bg: rgba(241, 245, 249, 0.8);
+    --input-border: rgba(99, 102, 241, 0.18);
+    --input-text: #1e293b;
+
+    /* Toggle */
+    --toggle-off-bg: rgba(99, 102, 241, 0.15);
+
+    /* Code/mono */
+    --accent-indigo: #6366F1;
+    --accent-indigo-light: #818CF8;
+
+    --radius: 0.5rem;
+  }
+
+  [data-theme="dark"] {
+    /* Page background */
+    --page-bg: #0f172a;
+    --page-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+
+    /* Sidebar */
+    --sidebar-bg: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
+    --sidebar-border: rgba(99, 102, 241, 0.15);
+    --sidebar-active-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(59, 130, 246, 0.15));
+    --sidebar-active-text: #C7D2FE;
+    --sidebar-active-icon: #818CF8;
+    --sidebar-active-border: #818CF8;
+    --sidebar-text: #94A3B8;
+    --sidebar-icon: #64748B;
+    --sidebar-user-name: #ffffff;
+    --sidebar-user-role: #64748B;
+    --sidebar-logo-text: #ffffff;
+
+    /* Navbar */
+    --navbar-bg: rgba(15, 23, 42, 0.8);
+    --navbar-border: rgba(99, 102, 241, 0.1);
+    --navbar-search-bg: rgba(30, 41, 59, 0.6);
+    --navbar-search-border: rgba(99, 102, 241, 0.15);
+    --navbar-search-text: #E2E8F0;
+    --navbar-search-placeholder: #475569;
+    --navbar-bell-bg: rgba(30, 41, 59, 0.6);
+    --navbar-bell-icon: #94A3B8;
+    --navbar-name: #E2E8F0;
+    --navbar-role: #64748B;
+    --navbar-divider: rgba(99, 102, 241, 0.15);
+
+    /* Cards */
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --card-border: rgba(99, 102, 241, 0.1);
+    --card-inner-bg: rgba(15, 23, 42, 0.5);
+    --card-inner-border: rgba(99, 102, 241, 0.05);
+
+    /* Text */
+    --text-primary: #F1F5F9;
+    --text-secondary: #E2E8F0;
+    --text-muted: #94A3B8;
+    --text-faint: #64748B;
+    --text-white-always: #ffffff;
+
+    /* Table */
+    --table-header-text: #94A3B8;
+    --table-row-border: rgba(99, 102, 241, 0.05);
+    --table-row-hover: rgba(99, 102, 241, 0.05);
+
+    /* Buttons */
+    --btn-secondary-bg: rgba(99, 102, 241, 0.1);
+    --btn-secondary-text: #818CF8;
+    --btn-secondary-border: rgba(99, 102, 241, 0.2);
+
+    /* Input */
+    --input-bg: rgba(15, 23, 42, 0.5);
+    --input-border: rgba(99, 102, 241, 0.15);
+    --input-text: #E2E8F0;
+
+    /* Toggle */
+    --toggle-off-bg: rgba(99, 102, 241, 0.2);
+
+    /* Code/mono */
+    --accent-indigo: #818CF8;
+    --accent-indigo-light: #C7D2FE;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--table-row-border);
+  }
+
+  body {
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.glass-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Theme-aware component classes */
+.theme-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-card-inner {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--card-inner-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-input {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-text);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 1px solid var(--btn-secondary-border);
+  transition: background 0.2s ease;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+[data-theme="light"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}

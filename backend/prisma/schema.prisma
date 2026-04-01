@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// Enums replaced with String literals for SQLite compatibility
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("PATIENT")
+  name      String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  doctor        Doctor?
+  patient       Patient?
+  staff         Staff?
+  notifications Notification[]
+}
+
+model Doctor {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  specialization String
+  availability   String     // e.g., { "Monday": ["09:00", "17:00"] } as JSON string
+  user           User     @relation(fields: [userId], references: [id])
+  
+  appointments   Appointment[]
+  prescriptions  Prescription[]
+}
+
+model Patient {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  dob           DateTime?
+  gender        String?
+  address       String?
+  bloodGroup    String?
+  user          User     @relation(fields: [userId], references: [id])
+
+  appointments  Appointment[]
+  prescriptions Prescription[]
+  labReports    LabReport[]
+  invoices      Invoice[]
+}
+
+model Staff {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  department String
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Appointment {
+  id        String            @id @default(uuid())
+  doctorId  String
+  patientId String
+  date      DateTime
+  reason    String?
+  status    String            @default("PENDING")
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  doctor    Doctor  @relation(fields: [doctorId], references: [id])
+  patient   Patient @relation(fields: [patientId], references: [id])
+  
+  prescription Prescription?
+  invoice      Invoice?
+}
+
+model Prescription {
+  id            String   @id @default(uuid())
+  appointmentId String   @unique
+  medicines     String     // Array of { name, dosage, frequency } as JSON string
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  doctor        Doctor      @relation(fields: [doctorId], references: [id]) // Redundant but useful
+  doctorId      String
+  patient       Patient     @relation(fields: [patientId], references: [id]) // Redundant but useful
+  patientId     String
+}
+
+model Medicine {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  stock       Int
+  price       Float
+  expiryDate  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LabReport {
+  id        String   @id @default(uuid())
+  patientId String
+  testName  String
+  result    String?  // Could be a URL to PDF
+  status    String   @default("PENDING") // PENDING, COMPLETED
+  createdAt DateTime @default(now())
+
+  patient   Patient @relation(fields: [patientId], references: [id])
+}
+
+model Invoice {
+  id            String        @id @default(uuid())
+  patientId     String
+  appointmentId String?       @unique
+  totalAmount   Float
+  status        String        @default("PENDING")
+  items         String          // Array of { description, amount } as JSON string
+  createdAt     DateTime      @default(now())
+
+  patient       Patient      @relation(fields: [patientId], references: [id])
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
