@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "cd backend && npx prisma generate",
-    "build": "cd frontend && npm install && npm run build",
-    "install-all": "cd backend && npm install && cd ../frontend && npm install"
+    "build": "cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -15,8 +13,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
-    "jsonwebtoken": "^9.0.3",
-    "prisma": "^5.22.0"
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -25,6 +22,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.2.3",
+    "prisma": "^5.22.0",
     "typescript": "^5.9.3"
   }
 }
