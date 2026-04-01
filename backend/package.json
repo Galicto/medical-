@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc",
+    "tsc-build": "tsc",
+    "build": "echo 'Backend build skipped - using api/index.ts serverless function'",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
