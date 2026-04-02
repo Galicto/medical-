@@ -3,7 +3,7 @@ import axios from 'axios';
 // In production (Vercel), the backend is served under /api on the same domain
 // In development, proxy to localhost:5000
 const API_BASE_URL = import.meta.env.VITE_API_URL 
-  || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
+  || (import.meta.env.DEV ? 'http://localhost:5001/api' : '/api');
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -11,6 +11,15 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+});
+
+// Attach Bearer token for Vercel serverless API (token-based auth)
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('medlife_token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
 });
 
 // Auth

@@ -87,19 +87,26 @@ const RegisterPage = () => {
 
             {/* Floating particles */}
             <div className="absolute inset-0 z-0">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 rounded-full"
-                        style={{
-                            background: `rgba(99, 102, 241, ${0.3 + Math.random() * 0.3})`,
-                            left: `${10 + Math.random() * 80}%`,
-                            top: `${10 + Math.random() * 80}%`,
-                        }}
-                        animate={{ y: [0, -30, 0], opacity: [0.3, 0.8, 0.3] }}
-                        transition={{ duration: 3 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
-                    />
-                ))}
+                {[...Array(6)].map((_, i) => {
+                    const randomColorAlpha = 0.3 + Math.random() * 0.3;
+                    const randomLeft = 10 + Math.random() * 80;
+                    const randomTop = 10 + Math.random() * 80;
+                    const randomDuration = 3 + Math.random() * 3;
+                    const randomDelay = Math.random() * 2;
+                    return (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full"
+                            style={{
+                                background: `rgba(99, 102, 241, ${randomColorAlpha})`,
+                                left: `${randomLeft}%`,
+                                top: `${randomTop}%`,
+                            }}
+                            animate={{ y: [0, -30, 0], opacity: [0.3, 0.8, 0.3] }}
+                            transition={{ duration: randomDuration, repeat: Infinity, delay: randomDelay }}
+                        />
+                    );
+                })}
             </div>
 
             {/* Login Card */}

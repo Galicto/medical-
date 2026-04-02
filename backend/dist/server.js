@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:5173', // Frontend URL
+    origin: (origin, callback) => callback(null, true), // Allow Vercel origins
     credentials: true
 }));
 app.use(express_1.default.json());
@@ -39,7 +39,10 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something went wrong!' });
 });
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Start Server conditionally for local dev
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
+exports.default = app;

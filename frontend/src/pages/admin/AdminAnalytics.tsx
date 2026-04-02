@@ -7,6 +7,8 @@ const AdminAnalytics = () => {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
+    const [error, setError] = useState<string | null>(null);
+
     useEffect(() => {
         Promise.all([adminModuleApi.getDashboard(), adminModuleApi.getDoctors()])
             .then(([dashRes, docsRes]) => {
@@ -23,13 +25,34 @@ const AdminAnalytics = () => {
             })
             .catch(err => {
                 console.error('Failed to fetch analytics', err);
+                if (err.response?.status === 401) {
+                    setError("Session expired or unauthorized. Please log out and sign in again.");
+                } else {
+                    setError("Failed to load analytics data.");
+                }
                 setLoading(false);
             });
     }, []);
 
-    if (loading || !data) {
+    if (loading) {
         return <div className="flex items-center justify-center min-h-[50vh]"><span style={{ color: 'var(--text-faint)' }}>Loading analytics...</span></div>;
     }
+
+    if (error) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
+                <span className="text-red-500 font-semibold">{error}</span>
+                <button 
+                    onClick={() => { localStorage.clear(); window.location.href = '/login'; }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                >
+                    Return to Login
+                </button>
+            </div>
+        );
+    }
+
+    if (!data) return null;
 
     const kpis = [
         { label: 'Total Patients', value: data.dashboard.totalPatients, change: '+2.1%', icon: Users, color: '#10B981' },

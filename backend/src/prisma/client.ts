@@ -2,7 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
 
-let dbUrl = process.env.DATABASE_URL || 'file:./dev.db';
+// Absolute path to the DB file — prevents cwd-relative path issues with ts-node
+const DB_PATH = path.resolve(__dirname, '..', '..', 'prisma', 'dev.db');
+let dbUrl = `file:${DB_PATH}`;
 
 if (process.env.VERCEL) {
     // Vercel has read-only filesystem. Copy SQLite to /tmp so write operations don't 500 crash
